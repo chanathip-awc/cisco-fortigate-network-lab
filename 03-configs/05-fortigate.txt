@@ -1,0 +1,155 @@
+FortiGate-LAB # show 
+#config-version=FGVMK6-7.0.9-FW-build0444-221121:opmode=1:vdom=0:user=admin
+#conf_file_ver=283893043364060
+#buildno=0444
+#global_vdom=1
+config system global
+    set alias "FortiGate-VM64-KVM"
+    set hostname "FortiGate-LAB"
+    set timezone 53
+end
+config system accprofile
+    edit "prof_admin"
+        set secfabgrp read-write
+        set ftviewgrp read-write
+        set authgrp read-write
+        set sysgrp read-write
+        set netgrp read-write
+        set loggrp read-write
+        set fwgrp read-write
+        set vpngrp read-write
+        set utmgrp read-write
+        set wanoptgrp read-write
+        set wifi read-write
+    next
+end
+config system interface
+    edit "port1"
+        set vdom "root"
+        set ip 10.0.20.1 255.255.255.0
+        set allowaccess ping ssh http
+        set type physical
+        set alias "WAN"
+        set lldp-reception enable
+        set role wan
+        set snmp-index 1
+    next
+    edit "port2"
+        set vdom "root"
+        set ip 10.2.2.1 255.255.255.252
+        set allowaccess ping
+        set type physical
+        set alias "LAN1"
+        set snmp-index 2
+    next
+    edit "port3"
+        set vdom "root"
+        set ip 10.3.3.1 255.255.255.252
+        set allowaccess ping
+        set type physical
+        set alias "LAN2"
+        set device-identification enable
+        set lldp-transmission enable
+        set role lan
+        set snmp-index 3
+    next
+    edit "port4"
+        set vdom "root"
+        set type physical
+        set snmp-index 4
+    next
+    edit "naf.root"
+        set vdom "root"
+        set type tunnel
+        set src-check disable
+        set snmp-index 5
+    next
+    edit "l2t.root"
+        set vdom "root"
+        set type tunnel
+        set snmp-index 6
+    next
+    edit "ssl.root"
+        set vdom "root"
+        set type tunnel
+        set alias "SSL VPN interface"
+        set snmp-index 7
+    next
+    edit "fortilink"
+        set vdom "root"
+        set fortilink enable
+        set ip 10.255.1.1 255.255.255.0
+        set allowaccess ping fabric
+        set type aggregate
+        set lldp-reception enable
+        set lldp-transmission enable
+        set snmp-index 8
+    next
+    edit "IPsecVPN"
+        set vdom "root"
+        set ip 169.254.1.1 255.255.255.255
+        set allowaccess fabric
+        set status down
+        set type tunnel
+        set remote-ip 169.254.1.1 255.255.255.255
+        set snmp-index 9
+        set interface "port1"
+    next
+end
+config system custom-language
+    edit "en"
+        set filename "en"
+    next
+    edit "fr"
+        set filename "fr"
+    next
+    edit "sp"
+        set filename "sp"
+    next
+    edit "pg"
+        set filename "pg"
+    next
+    edit "x-sjis"
+        set filename "x-sjis"
+    next
+    edit "big5"
+        set filename "big5"
+    next
+    edit "GB2312"
+        set filename "GB2312"
+    next
+    edit "euc-kr"
+        set filename "euc-kr"
+    next
+end
+config system admin
+    edit "admin"
+        set accprofile "super_admin"
+        set vdom "root"
+        set password ENC SH2iWom48aWbDN3/H1xiss8RdCKeUwrJ9cKJWZK0UMjvNfFbwKCKAjhZZqwfPY=
+    next
+end
+config system sso-admin
+end
+config system ha
+    set override disable
+end
+config system auto-scale
+end
+config system dns
+    set primary 8.8.8.8
+    set secondary 1.1.1.1
+end
+config system replacemsg-image
+    edit "logo_fnet"
+        set image-type gif
+        set image-base64 ''
+    next
+    edit "logo_fguard_wf"
+        set image-type gif
+        set image-base64 ''
+    next
+    edit "logo_v3_fguard_app"
+        set image-base64 ''
+    next
+end
