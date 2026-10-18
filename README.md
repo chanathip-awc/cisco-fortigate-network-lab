@@ -182,7 +182,7 @@ Full device configurations are in the [`03-configs/`](03-configs/) folder (sensi
 
 ![Clients show ip](02-screenshots/15-clients-show-ip.png)
 
-**Internet connectivity** (`ping 8.8.8.8`)
+**Internet connectivity** (`ping 8.8.8.8, 1.1.1.1`)
 
 ![Clients Internet ping](02-screenshots/16-clients-internet-ping.png)
 
